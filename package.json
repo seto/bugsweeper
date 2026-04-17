@@ -1,0 +1,23 @@
+{
+  "name": "bugsweeper",
+  "version": "1.0.0",
+  "description": "A simulator of deployment anxiety in the DOM desert.",
+  "author": "seto",
+  "license": "unlicense",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seto/bugsweeper.git"
+  },
+  "scripts": {
+    "start": "echo 'Server is not required, just open index.html and enjoy.' && open index.html",
+    "test": "echo 'Error: All tests passed by default.' && exit 0",
+    "build": "echo 'Build? Really?' && exit 0",
+    "deploy": "git push origin master && echo 'Deploying to production... Just kidding, this is a static page.'"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": [
+    "minesweeper",
+    "github"
+  ]
+}
