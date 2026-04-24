@@ -64,6 +64,10 @@ const msgBtn = document.getElementById('msg-btn');
 
 const pad3 = (n) => String(Math.min(n, 999)).padStart(3, '0');
 
+/**
+ * Returns coordinates of neighboring cells for a given cell.
+ * Filters out neighbors that are out of bounds.
+ */
 function neighbors(r, c) {
   const DIRS = [
     [-1, -1],
@@ -81,6 +85,11 @@ function neighbors(r, c) {
   );
 }
 
+/**
+ * Randomly places mines on the board.
+ * Avoids placing mines on the first clicked cell and its neighbors ensuring the
+ * the opening move is always safe.
+ */
 function placeMines(safeR, safeC) {
   const { rows, cols, mines, board } = state;
   const safe = new Set();
@@ -113,6 +122,11 @@ function placeMines(safeR, safeC) {
   }
 }
 
+/**
+ * Syncs the DOM element of a cell with its state.
+ * Handles three visual states in order of priority: flagged, unrevealed, revealed.
+ * The `revealed-N` class (capped at 4) drives the neighbor-count color via CSS.
+ */
 function updateCellEl(r, c) {
   const cell = state.board[r][c];
   const el = boardEl.querySelector(`[data-r="${r}"][data-c="${c}"]`);
@@ -141,11 +155,20 @@ function updateCellEl(r, c) {
   el.classList.add('revealed', `revealed-${Math.min(n, 4)}`);
 }
 
+/**
+ * Updates the mine counter display.
+ * Floors at 0 to avoid showing negative values when flags exceed mine count.
+ */
 function updateMineCount() {
   const remaining = state.mines - state.flags;
   mineCountEl.textContent = pad3(Math.max(remaining, 0));
 }
 
+/**
+ * Cascade reveals cells.
+ * If a cell has no mines around, propagates to its neighbors with a staggered
+ * delay to animate the flood-fill visually.
+ */
 function reveal(r, c, cascade = false) {
   const { board, rows, cols } = state;
   const cell = board[r][c];
@@ -172,6 +195,11 @@ function reveal(r, c, cascade = false) {
   checkWin();
 }
 
+/**
+ * Chording move.
+ * Reveals all unflagged neighbors if the flagged-neighbor count is equal to the
+ * cell's neighbor count.
+ */
 function chord(r, c) {
   const cell = state.board[r][c];
   if (!cell.revealed || cell.mine) return;
@@ -190,6 +218,10 @@ function chord(r, c) {
   }
 }
 
+/**
+ * Checks if all non-mine cells have been revealed.
+ * On win, auto-flags any unflagged mines before showing the overlay.
+ */
 function checkWin() {
   const { rows, cols, mines, revealed } = state;
   if (revealed === rows * cols - mines) {
@@ -218,6 +250,10 @@ function checkWin() {
   }
 }
 
+/**
+ * Ends the game on mine hit.
+ * Reveals all mines and marks wrong flags.
+ */
 function triggerGameOver(explodedR, explodedC) {
   state.gameOver = true;
   clearInterval(state.timerInterval);
