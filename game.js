@@ -62,6 +62,13 @@ const msgTitle = document.getElementById('msg-title');
 const msgSubtitle = document.getElementById('msg-subtitle');
 const msgBtn = document.getElementById('msg-btn');
 
+const footerMsg = document.querySelector('footer p');
+if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+  footerMsg.textContent = 'Tap to commit · Long-press to open a PR';
+} else {
+  footerMsg.textContent = 'Left-click to commit · Right-click to open a PR';
+}
+
 const pad3 = (n) => String(Math.min(n, 999)).padStart(3, '0');
 
 /**
@@ -193,6 +200,18 @@ function reveal(r, c, cascade = false) {
   }
 
   checkWin();
+}
+
+function toggleFlag(r, c) {
+  const cell = state.board[r][c];
+  if (cell.revealed) return;
+
+  cell.flagged = !cell.flagged;
+  state.flags += cell.flagged ? 1 : -1;
+  updateCellEl(r, c);
+  updateMineCount();
+
+  if (!state.started) startGame(r, c);
 }
 
 /**
@@ -364,19 +383,29 @@ boardEl.addEventListener('contextmenu', (e) => {
   e.preventDefault();
   const el = e.target.closest('.cell');
   if (!el || state.gameOver) return;
+  toggleFlag(+el.dataset.r, +el.dataset.c);
+});
 
-  const r = +el.dataset.r,
-    c = +el.dataset.c;
-  const cell = state.board[r][c];
+let longPressTimer = null;
 
-  if (cell.revealed) return;
+boardEl.addEventListener('touchstart', (e) => {
+  const el = e.target.closest('.cell');
+  if (!el || state.gameOver) return;
 
-  cell.flagged = !cell.flagged;
-  state.flags += cell.flagged ? 1 : -1;
-  updateCellEl(r, c);
-  updateMineCount();
+  longPressTimer = setTimeout(() => {
+    e.preventDefault();
+    toggleFlag(+el.dataset.r, +el.dataset.c);
+  }, 500);
+});
 
-  if (!state.started) startGame(r, c);
+boardEl.addEventListener('touchend', () => {
+  clearTimeout(longPressTimer);
+  longPressTimer = null;
+});
+
+boardEl.addEventListener('touchmove', () => {
+  clearTimeout(longPressTimer);
+  longPressTimer = null;
 });
 
 document.querySelectorAll('.diff-btn').forEach((btn) => {
@@ -396,8 +425,9 @@ document.querySelectorAll('.diff-btn').forEach((btn) => {
       state.cols = 16;
       state.mines = 40;
     } else if (diff == 'expert') {
-      state.rows = 16;
-      state.cols = 30;
+      const isWide = window.innerWidth >= 560;
+      state.rows = isWide ? 16 : 30;
+      state.cols = isWide ? 30 : 16;
       state.mines = 99;
     }
 
