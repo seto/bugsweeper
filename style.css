@@ -30,6 +30,30 @@
   --font: 'JetBrains Mono', 'Courier New', monospace;
 }
 
+.light-theme {
+  --c0: #eff2f5;
+  --c1: #aceebb;
+  --c2: #4ac26b;
+  --c3: #2da44e;
+  --c4: #116329;
+
+  --c-unrevealed: #e6edf3;
+
+  --c-hover: #e0e7ef;
+  --c-border: #d1d9e0;
+  --c-border-hover: #6e7781;
+
+  --bg: #f6f8fa;
+  --surface: #fff;
+  --surface2: #f6f8fa;
+  --text: #24292f;
+  --text-muted: #6e7781;
+  --accent: #2da44e;
+  --accent-hover: #218838;
+  --red: #fe4c25;
+  --blue: #58a6ff;
+}
+
 *,
 *::before,
 *::after {
@@ -60,6 +84,31 @@ header {
   z-index: 1;
   text-align: center;
   padding: 2.5rem 1rem 0.75rem;
+}
+
+#theme-toggle {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  transition: all 0.2s;
+}
+
+#theme-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+#theme-toggle:hover {
+  background: var(--surface2);
+  color: var(--text);
+  border-color: var(--c-border-hover);
 }
 
 .logo {
@@ -299,7 +348,7 @@ main {
 }
 
 .cell.flagged {
-  background: #1c2d40;
+  background: var(--c0);
   border-color: var(--blue);
 }
 

@@ -50,8 +50,18 @@ const SVG = {
   gameOver: `<svg class="cell-icon" viewBox="0 0 16 16" fill="#d1242f">
     <path d="M3.25 1A2.25 2.25 0 0 1 4 5.372v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.251 2.251 0 0 1 3.25 1Zm9.5 5.5a.75.75 0 0 1 .75.75v3.378a2.251 2.251 0 1 1-1.5 0V7.25a.75.75 0 0 1 .75-.75Zm-2.03-5.273a.75.75 0 0 1 1.06 0l.97.97.97-.97a.748.748 0 0 1 1.265.332.75.75 0 0 1-.205.729l-.97.97.97.97a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-.97-.97-.97.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l.97-.97-.97-.97a.75.75 0 0 1 0-1.06ZM2.5 3.25a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0ZM3.25 12a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm9.5 0a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/>
   </svg>`,
+
+  // Theme toggle icons
+  moon: `<svg class="theme-icon" viewBox="0 0 16 16" fill="currentColor">
+    <path d="M9.598 1.591a.749.749 0 0 1 .785-.175 7.001 7.001 0 1 1-8.967 8.967.75.75 0 0 1 .961-.96 5.5 5.5 0 0 0 7.046-7.046.75.75 0 0 1 .175-.786Zm1.616 1.945a7 7 0 0 1-7.678 7.678 5.499 5.499 0 1 0 7.678-7.678Z"/>
+  </svg>`,
+
+  sun: `<svg class="theme-icon" viewBox="0 0 16 16" fill="currentColor">
+    <path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm0-1.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm5.657-8.157a.75.75 0 0 1 0 1.061l-1.061 1.06a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.06-1.06a.75.75 0 0 1 1.06 0Zm-9.193 9.193a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.061-1.06l1.06-1.061a.75.75 0 0 1 1.061 0ZM8 0a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V.75A.75.75 0 0 1 8 0ZM3 8a.75.75 0 0 1-.75.75H.75a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 3 8Zm13 0a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 16 8Zm-8 5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 8 13Zm3.536-1.464a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061l-1.061-1.06a.75.75 0 0 1 0-1.061ZM2.343 2.343a.75.75 0 0 1 1.061 0l1.06 1.061a.751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018l-1.06-1.06a.75.75 0 0 1 0-1.06Z"/>
+  </svg>`,
 };
 
+const themeToggleBtn = document.getElementById('theme-toggle');
 const boardEl = document.getElementById('board');
 const mineCountEl = document.getElementById('mine-count');
 const timerEl = document.getElementById('timer');
@@ -70,6 +80,15 @@ if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
 }
 
 const pad3 = (n) => String(Math.min(n, 999)).padStart(3, '0');
+
+function setTheme(theme) {
+  document.documentElement.classList.toggle('light-theme', theme === 'light');
+  if (theme === 'dark') {
+    themeToggleBtn.innerHTML = SVG.sun;
+  } else {
+    themeToggleBtn.innerHTML = SVG.moon;
+  }
+}
 
 /**
  * Returns coordinates of neighboring cells for a given cell.
@@ -359,6 +378,17 @@ function newGame() {
   }
 }
 
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+  if (localStorage.getItem('theme')) return;
+  setTheme(e.matches ? 'light' : 'dark');
+});
+
+themeToggleBtn.addEventListener('click', () => {
+  const isLight = document.documentElement.classList.contains('light-theme');
+  setTheme(isLight ? 'dark' : 'light');
+  localStorage.setItem('theme', isLight ? 'dark' : 'light');
+});
+
 boardEl.addEventListener('click', (e) => {
   const el = e.target.closest('.cell');
   if (!el || state.gameOver) return;
@@ -438,5 +468,10 @@ document.querySelectorAll('.diff-btn').forEach((btn) => {
 resetBtn.addEventListener('click', newGame);
 
 msgBtn.addEventListener('click', newGame);
+
+const isThemeSaved = localStorage.getItem('theme');
+const isSystemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+setTheme(isThemeSaved ?? (isSystemLight ? 'light' : 'dark'));
 
 newGame();

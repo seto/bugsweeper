@@ -10,7 +10,7 @@ A minimal, zero-dependency Minesweeper clone themed around the daily struggle fo
 
 In the contribution graph of life, you don't find mines. You find **Bugs**.
 
-- **Green cells**: Safe commits. Brighter the green, the more bugs are lurking nearby.
+- **Green cells**: Safe commits. Higher the intensity, more bugs are lurking nearby.
 - **Red circles**: Critical Issues. Open one, and your production is gone.
 - **Blue flags**: Pull Requests. Use them to mark suspicious commits.
 
