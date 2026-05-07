@@ -107,7 +107,7 @@ function neighbors(r, c) {
   ];
 
   return DIRS.map(([dr, dc]) => [r + dr, c + dc]).filter(
-    ([nr, nc]) => nr >= 0 && nr < state.rows && nc >= 0 && nc < state.cols,
+    ([nr, nc]) => nr >= 0 && nr < state.rows && nc >= 0 && nc < state.cols
   );
 }
 
@@ -120,9 +120,7 @@ function placeMines(safeR, safeC) {
   const { rows, cols, mines, board } = state;
   const safe = new Set();
 
-  [[safeR, safeC], ...neighbors(safeR, safeC)].forEach(([r, c]) =>
-    safe.add(r * cols + c),
-  );
+  [[safeR, safeC], ...neighbors(safeR, safeC)].forEach(([r, c]) => safe.add(r * cols + c));
 
   let placed = 0;
   while (placed < mines) {
@@ -140,9 +138,7 @@ function placeMines(safeR, safeC) {
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       if (!board[r][c].mine) {
-        board[r][c].neighbors = neighbors(r, c).filter(
-          ([nr, nc]) => board[nr][nc].mine,
-        ).length;
+        board[r][c].neighbors = neighbors(r, c).filter(([nr, nc]) => board[nr][nc].mine).length;
       }
     }
   }
@@ -243,9 +239,7 @@ function chord(r, c) {
   if (!cell.revealed || cell.mine) return;
 
   const nbs = neighbors(r, c);
-  const flagCount = nbs.filter(
-    ([nr, nc]) => state.board[nr][nc].flagged,
-  ).length;
+  const flagCount = nbs.filter(([nr, nc]) => state.board[nr][nc].flagged).length;
 
   if (flagCount === cell.neighbors) {
     nbs.forEach(([nr, nc]) => {
@@ -283,7 +277,7 @@ function checkWin() {
     showMessage(
       SVG.victory,
       'All bugs fixed!',
-      `Merged in ${pad3(state.seconds)}s. Your repository is clean.`,
+      `Merged in ${pad3(state.seconds)}s. Your repository is clean.`
     );
   }
 }
@@ -318,7 +312,7 @@ function triggerGameOver(explodedR, explodedC) {
   showMessage(
     SVG.gameOver,
     'Repository compromised!',
-    `A critical issue was opened after ${pad3(state.seconds)}s. All bugs exposed.`,
+    `A critical issue was opened after ${pad3(state.seconds)}s. All bugs exposed.`
   );
 }
 
@@ -350,7 +344,7 @@ function newGame() {
       neighbors: 0,
       revealed: false,
       flagged: false,
-    })),
+    }))
   );
 
   state.revealed = 0;
@@ -440,9 +434,7 @@ boardEl.addEventListener('touchmove', () => {
 
 document.querySelectorAll('.diff-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
-    document
-      .querySelectorAll('.diff-btn')
-      .forEach((b) => b.classList.remove('active'));
+    document.querySelectorAll('.diff-btn').forEach((b) => b.classList.remove('active'));
     btn.classList.add('active');
 
     const diff = btn.dataset.difficulty;

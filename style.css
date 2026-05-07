@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P:wght@400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P:wght@400&display=swap");
 
 :root {
   --c0: #151b23;
@@ -27,7 +27,7 @@
   --cell-size: 14px;
   --cell-gap: 3px;
   --cell-radius: 2px;
-  --font: 'JetBrains Mono', 'Courier New', monospace;
+  --font: "JetBrains Mono", "Courier New", monospace;
 }
 
 .light-theme {
@@ -116,7 +116,7 @@ header {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  font-family: 'Press Start 2P', system-ui;
+  font-family: "Press Start 2P", system-ui;
   font-size: 1.8rem;
   letter-spacing: 0.04em;
   color: var(--text);
