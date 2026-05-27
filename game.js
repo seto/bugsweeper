@@ -71,6 +71,7 @@ const msgIcon = document.getElementById('msg-icon');
 const msgTitle = document.getElementById('msg-title');
 const msgSubtitle = document.getElementById('msg-subtitle');
 const msgBtn = document.getElementById('msg-btn');
+const msgClose = document.getElementById('msg-close');
 
 const footerMsg = document.querySelector('footer p');
 if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
@@ -460,6 +461,8 @@ document.querySelectorAll('.diff-btn').forEach((btn) => {
 resetBtn.addEventListener('click', newGame);
 
 msgBtn.addEventListener('click', newGame);
+
+msgClose.addEventListener('click', () => overlay.classList.add('hidden'));
 
 const isThemeSaved = localStorage.getItem('theme');
 const isSystemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
