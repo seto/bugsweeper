@@ -6,8 +6,9 @@
   <a href="https://seto.github.io/bugsweeper"><img src="https://img.shields.io/badge/play-now-brightgreen.svg" alt="Play Now"></a>
 </p>
 
-A minimal Minesweeper clone themed around the daily struggle of every developer: you think you're shipping features, but you're actually just navigating bugs you haven't found yet.  
-_Every commit is a gamble. Watch your commits._
+A minimal Minesweeper clone themed around the daily struggle of every developer: you think you're shipping features, but you're actually just tiptoeing through a minefield of your own making.
+
+_Every commit is a gamble. Every merge is a reckoning. Watch your step._
 
 ---
 
