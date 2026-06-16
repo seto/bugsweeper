@@ -6,14 +6,16 @@
   <a href="https://seto.github.io/bugsweeper"><img src="https://img.shields.io/badge/play-now-brightgreen.svg" alt="Play Now"></a>
 </p>
 
-A minimal Minesweeper clone themed around the daily struggle of every developer: you think you're shipping features, but you're actually just tiptoeing through a minefield of your own making.
+A minimal Minesweeper clone themed around the daily struggle of every developer: you
+think you're shipping features, but you're actually just tiptoeing through a minefield
+of your own making.
 
 _Every commit is a gamble. Every merge is a reckoning. Watch your step._
 
 ---
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/4960b1d8-5a03-459a-933b-ea49e9455794" width="800" alt="Demo" />
+  <img src="https://github.com/user-attachments/assets/4960b1d8-5a03-459a-933b-ea49e9455794" width="800" alt="Demo">
 </p>
 
 ---
@@ -22,9 +24,11 @@ _Every commit is a gamble. Every merge is a reckoning. Watch your step._
 
 In the contribution graph of life, you don't find mines. You find **Bugs**.
 
-- **Green cells**: Safe commits. The higher the intensity, the more bugs are lurking nearby.
+- **Green cells**: Safe commits. The higher the intensity, the more bugs are lurking
+  nearby.
 - **Red circles**: Critical Issues. Open one, and your production is gone.
-- **Blue flags**: Pull Requests. Use them to mark suspicious commits before it's too late.
+- **Blue flags**: Pull Requests. Use them to mark suspicious commits before it's too
+  late.
 
 ## Features
 
@@ -51,6 +55,8 @@ open index.html  # or just drag it into your browser
 
 ## Credits and License
 
-Icons by [GitHub Octicons](https://primer.style/octicons/). Font via [Google Fonts](https://fonts.google.com/).
+Icons by [GitHub Octicons](https://primer.style/octicons/). Font via
+[Google Fonts](https://fonts.google.com/).
 
-[The Unlicense](https://unlicense.org/) — Do whatever you want. This code belongs to the void.
+[The Unlicense](https://unlicense.org/) — Do whatever you want. This code belongs to the
+void.
