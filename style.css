@@ -88,10 +88,16 @@ header {
   padding: 2.5rem 1rem 0.75rem;
 }
 
-#theme-toggle {
+.header-buttons {
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+#theme-toggle,
+#numbers-toggle {
   background: var(--surface);
   border: 1px solid var(--c-border);
   border-radius: 6px;
@@ -100,17 +106,29 @@ header {
   cursor: pointer;
   display: flex;
   transition: all 0.2s;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
 }
 
-#theme-toggle svg {
+#theme-toggle svg,
+#numbers-toggle svg {
   width: 16px;
   height: 16px;
 }
 
-#theme-toggle:hover {
+#theme-toggle:hover,
+#numbers-toggle:hover {
   background: var(--surface2);
   color: var(--text);
   border-color: var(--c-border-hover);
+}
+
+#numbers-toggle.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
 }
 
 .logo {
@@ -388,6 +406,15 @@ main {
   height: 10px;
   pointer-events: none;
   flex-shrink: 0;
+}
+
+.cell-number {
+  font-family: var(--font);
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+  color: var(--text);
 }
 
 .legend {
