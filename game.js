@@ -500,7 +500,6 @@ numbersToggleBtn.addEventListener('click', () => {
 
 const isThemeSaved = localStorage.getItem('theme');
 const isSystemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-
 setTheme(isThemeSaved ?? (isSystemLight ? 'light' : 'dark'));
 
 const isNumbersSaved = localStorage.getItem('showNumbers') === 'true';
