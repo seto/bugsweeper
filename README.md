@@ -15,7 +15,7 @@ _Every commit is a gamble. Every merge is a reckoning. Watch your step._
 ---
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/4960b1d8-5a03-459a-933b-ea49e9455794" width="800" alt="Demo">
+  <img src="https://github.com/user-attachments/assets/1ac95b36-13ab-4221-b674-44ec1851e20f" width="800" alt="Demo">
 </p>
 
 ---
