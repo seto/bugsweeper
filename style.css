@@ -135,6 +135,47 @@ main {
   padding: 3px;
 }
 
+.zoom-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+
+.zoom-selector {
+  display: flex;
+  gap: 2px;
+  background: var(--surface);
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  padding: 3px;
+}
+
+.zoom-btn {
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 0.68rem;
+  padding: 0.25rem 0.4rem;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.zoom-btn:hover {
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.zoom-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
 .diff-btn {
   background: transparent;
   border: none;
@@ -233,6 +274,7 @@ main {
   flex-direction: column;
   align-items: flex-start;
   gap: 6px;
+  width: max-content;
   max-width: 100%;
   padding-bottom: 0.5rem;
 }
@@ -251,6 +293,7 @@ main {
 #board {
   display: grid;
   gap: var(--cell-gap);
+  width: max-content;
 }
 
 .cell {
@@ -359,15 +402,15 @@ main {
 }
 
 .cell-icon {
-  width: 10px;
-  height: 10px;
+  width: calc(var(--cell-size) * 0.72);
+  height: calc(var(--cell-size) * 0.72);
   pointer-events: none;
   flex-shrink: 0;
 }
 
 .cell-number {
   font-family: var(--font);
-  font-size: 0.65rem;
+  font-size: calc(var(--cell-size) * 0.48);
   font-weight: 700;
   line-height: 1;
   pointer-events: none;
@@ -554,6 +597,13 @@ footer {
   .diff-btn {
     padding: 0.2rem 0.6rem;
     font-size: 0.73rem;
+  }
+  .zoom-control {
+    gap: 0.35rem;
+  }
+  .zoom-btn {
+    padding: 0.2rem 0.3rem;
+    font-size: 0.62rem;
   }
   .stat-box {
     min-width: 73px;

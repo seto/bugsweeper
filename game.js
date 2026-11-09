@@ -67,6 +67,14 @@ const SVG = {
   </svg>`,
 };
 
+const GRID_ZOOM_SIZES = {
+  tiny: { cell: 11, gap: 2 },
+  small: { cell: 13, gap: 2 },
+  default: { cell: 14, gap: 3 },
+  large: { cell: 18, gap: 3 },
+  huge: { cell: 21, gap: 4 },
+};
+
 const themeToggleBtn = document.getElementById('theme-toggle');
 const numbersToggleBtn = document.getElementById('numbers-toggle');
 const boardEl = document.getElementById('board');
@@ -79,6 +87,7 @@ const msgTitle = document.getElementById('msg-title');
 const msgSubtitle = document.getElementById('msg-subtitle');
 const msgBtn = document.getElementById('msg-btn');
 const msgClose = document.getElementById('msg-close');
+const zoomButtons = document.querySelectorAll('.zoom-btn');
 
 const footerMsg = document.querySelector('footer p');
 if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
@@ -96,6 +105,21 @@ function setTheme(theme) {
   } else {
     themeToggleBtn.innerHTML = SVG.moon;
   }
+}
+
+function setGridZoom(zoom) {
+  if (!Object.prototype.hasOwnProperty.call(GRID_ZOOM_SIZES, zoom)) return;
+  const dimensions = GRID_ZOOM_SIZES[zoom];
+
+  boardEl.style.setProperty('--cell-size', `${dimensions.cell}px`);
+  boardEl.style.setProperty('--cell-gap', `${dimensions.gap}px`);
+  zoomButtons.forEach((button) => {
+    const active = button.dataset.zoom === zoom;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
+
+  localStorage.setItem('gridZoom', zoom);
 }
 
 /**
@@ -488,6 +512,10 @@ document.querySelectorAll('.diff-btn').forEach((btn) => {
   });
 });
 
+zoomButtons.forEach((button) => {
+  button.addEventListener('click', () => setGridZoom(button.dataset.zoom));
+});
+
 resetBtn.addEventListener('click', newGame);
 
 msgBtn.addEventListener('click', newGame);
@@ -506,5 +534,10 @@ const isNumbersSaved = localStorage.getItem('showNumbers') === 'true';
 setNumbersDisplay(isNumbersSaved);
 
 numbersToggleBtn.innerHTML = SVG.numbers;
+
+const savedGridZoom = localStorage.getItem('gridZoom');
+setGridZoom(
+  Object.prototype.hasOwnProperty.call(GRID_ZOOM_SIZES, savedGridZoom) ? savedGridZoom : 'default'
+);
 
 newGame();
