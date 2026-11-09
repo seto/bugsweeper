@@ -15,7 +15,7 @@ _Every commit is a gamble. Every merge is a reckoning. Watch your step._
 ---
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/1ac95b36-13ab-4221-b674-44ec1851e20f" width="800" alt="Demo">
+  <img src="https://github.com/user-attachments/assets/eb4c3f88-8a6f-4f9e-9459-12f100ef6d76" width="800" alt="Demo">
 </p>
 
 ---
@@ -33,6 +33,7 @@ In the contribution graph of life, you don't find mines. You find **Bugs**.
 ## Features
 
 - Classic Minesweeper mechanics, developer-flavored
+- Five grid zoom levels, with your selection remembered between visits
 - Zero dependencies, zero build step, just open and play
 - Custom SVG icons and monospace aesthetics
 
