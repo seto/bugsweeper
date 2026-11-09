@@ -68,12 +68,13 @@ const SVG = {
 };
 
 const GRID_ZOOM_SIZES = {
-  tiny: { cell: 11, gap: 2 },
-  small: { cell: 13, gap: 2 },
-  default: { cell: 14, gap: 3 },
-  large: { cell: 18, gap: 3 },
-  huge: { cell: 21, gap: 4 },
+  tiny: { cell: 11, gap: 2, percent: 80 },
+  small: { cell: 13, gap: 2, percent: 90 },
+  default: { cell: 14, gap: 3, percent: 100 },
+  large: { cell: 18, gap: 3, percent: 125 },
+  huge: { cell: 21, gap: 4, percent: 150 },
 };
+const GRID_ZOOM_LEVELS = Object.keys(GRID_ZOOM_SIZES);
 
 const themeToggleBtn = document.getElementById('theme-toggle');
 const numbersToggleBtn = document.getElementById('numbers-toggle');
@@ -87,7 +88,7 @@ const msgTitle = document.getElementById('msg-title');
 const msgSubtitle = document.getElementById('msg-subtitle');
 const msgBtn = document.getElementById('msg-btn');
 const msgClose = document.getElementById('msg-close');
-const zoomButtons = document.querySelectorAll('.zoom-btn');
+const zoomSlider = document.getElementById('zoom-slider');
 
 const footerMsg = document.querySelector('footer p');
 if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
@@ -113,11 +114,8 @@ function setGridZoom(zoom) {
 
   boardEl.style.setProperty('--cell-size', `${dimensions.cell}px`);
   boardEl.style.setProperty('--cell-gap', `${dimensions.gap}px`);
-  zoomButtons.forEach((button) => {
-    const active = button.dataset.zoom === zoom;
-    button.classList.toggle('active', active);
-    button.setAttribute('aria-pressed', String(active));
-  });
+  zoomSlider.value = GRID_ZOOM_LEVELS.indexOf(zoom);
+  zoomSlider.setAttribute('aria-valuetext', `${dimensions.percent}%`);
   localStorage.setItem('gridZoom', zoom);
 }
 
@@ -511,8 +509,8 @@ document.querySelectorAll('.diff-btn').forEach((btn) => {
   });
 });
 
-zoomButtons.forEach((button) => {
-  button.addEventListener('click', () => setGridZoom(button.dataset.zoom));
+zoomSlider.addEventListener('input', () => {
+  setGridZoom(GRID_ZOOM_LEVELS[Number(zoomSlider.value)]);
 });
 
 resetBtn.addEventListener('click', newGame);
