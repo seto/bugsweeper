@@ -118,7 +118,6 @@ function setGridZoom(zoom) {
     button.classList.toggle('active', active);
     button.setAttribute('aria-pressed', String(active));
   });
-
   localStorage.setItem('gridZoom', zoom);
 }
 
